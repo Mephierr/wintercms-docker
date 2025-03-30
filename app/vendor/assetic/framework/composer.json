@@ -1,0 +1,68 @@
+{
+    "name": "assetic/framework",
+    "description": "Asset Management for PHP",
+    "keywords": ["assets", "compression", "minification"],
+    "homepage": "https://github.com/assetic-php/assetic",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kris Wallsmith",
+            "email": "kris.wallsmith@gmail.com",
+            "homepage": "http://kriswallsmith.net/"
+        },
+        {
+            "name": "Jack Wilkinson",
+            "email": "me@jackwilky.com",
+            "homepage": "https://jackwilky.com/"
+        },
+        {
+            "name": "Luke Towers",
+            "email": "octobercms@luketowers.ca",
+            "homepage": "https://luketowers.ca"
+        }
+    ],
+    "require": {
+        "php": "^7.3 || ^8.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-simplexml": "*",
+        "symfony/process": "^3.4 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
+        "symfony/deprecation-contracts": "^2.2.0 || ^3.0"
+    },
+    "require-dev": {
+        "wikimedia/less.php": "^3.0 || ^5.0",
+        "wikimedia/minify": "^2.2",
+        "scssphp/scssphp": "^1.0",
+        "meenie/javascript-packer": "^1.1",
+        "phpunit/phpunit": "^9.5.8",
+        "psr/log": "^1.0",
+        "ptachoire/cssembed": "^1.0",
+        "symfony/phpunit-bridge": "^3.4 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
+        "twig/twig": "^2.11",
+        "phpspec/prophecy-phpunit": "^2.0"
+    },
+    "suggest": {
+        "wikimedia/less.php": "The Assetic\\Filter\\LessphpFilter requires wikimedia/less.php",
+        "wikimedia/minify": "The Assetic\\Filter\\JavaScriptMinifierFilter && Assetic\\Filter\\CSSMinFilter requires wikimedia/minify",
+        "scssphp/scssphp": "The Assetic\\Filter\\ScssphpFilter requires scssphp/scssphp",
+        "meenie/javascript-packer": "The Assetic\\Filter\\PackerFilter requires meenie/javascript-packer",
+        "ptachoire/cssembed": "The Assetic\\Filter\\PhpCssEmbedFilter requires ptachoire/cssembed",
+        "twig/twig": "Assetic provides an integration with the Twig templating engine"
+    },
+    "replace": {
+        "kriswallsmith/assetic": "1.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Assetic": "src/"
+        },
+        "files": [
+            "src/functions.php",
+            "src/aliasing.php"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
