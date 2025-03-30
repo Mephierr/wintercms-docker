@@ -78,9 +78,8 @@ DB_PASSWORD=winter
 │   ├── config/           # Конфигурационные файлы
 │   ├── storage/          # Директория для хранения данных
 │   └── artisan           # Исполняемый файл консоли
-├── docker/
-│   ├── Dockerfile        # Конфигурация PHP/Apache
-│   └── entrypoint.sh     # Скрипт запуска
+├── Dockerfile            # Конфигурация PHP/Apache
+├── entrypoint.sh         # Скрипт запуска    
 ├── .env                  # Переменные окружения
 └── docker-compose.yml    # Определения сервисов
 ```
