@@ -49,3 +49,92 @@ docker-compose exec app php artisan key:generate
 
 # Запустить установщик Winter CMS
 docker-compose exec app php artisan winter:install
+```
+Доступ к сайту:
+
+    Фронтенд: http://localhost:8080
+
+    Админка: http://localhost:8080/backend
+
+## Конфигурация
+
+Измените файл .env:
+```bash
+APP_NAME=WinterCMS
+APP_ENV=local
+APP_KEY=base64:ваш-сгенерированный-ключ
+APP_URL=http://localhost:8080
+
+DB_HOST=db
+DB_DATABASE=winter
+DB_USERNAME=winter
+DB_PASSWORD=winter
+```
+## Структура проекта
+
+```bash
+├── app/                  # Приложение Winter CMS
+│   ├── bootstrap/        # Файлы фреймворка
+│   ├── config/           # Конфигурационные файлы
+│   ├── storage/          # Директория для хранения данных
+│   └── artisan           # Исполняемый файл консоли
+├── docker/
+│   ├── Dockerfile        # Конфигурация PHP/Apache
+│   └── entrypoint.sh     # Скрипт запуска
+├── .env                  # Переменные окружения
+└── docker-compose.yml    # Определения сервисов
+```
+
+## Основные команды
+Команда	Описание
+docker-compose up -d	Запуск контейнеров
+docker-compose down	Остановка контейнеров
+docker-compose exec app php artisan migrate	Выполнить миграции
+docker-compose exec app composer update	Обновить зависимости
+docker-compose logs -f app	Просмотр логов приложения
+
+## Решение проблем
+
+Отсутствуют vendor-файлы:
+```bash
+
+docker-compose exec app composer install
+```
+Проблемы с правами:
+```bash
+docker-compose exec app chown -R www-data:www-data /var/www/html/storage
+```
+
+Проблемы с подключением к БД:
+```bash
+
+docker-compose restart db
+```
+
+## Разработка
+
+Для внесения изменений:
+
+    Сделайте форк репозитория
+
+    Создайте ветку для новой фичи:
+
+```bash
+git checkout -b feature/новая-фича
+```
+
+    Сделайте коммит изменений:
+
+```bash
+git commit -m "Добавлена новая фича"
+```
+    Запушьте изменения в ветку:
+
+```bash
+git push origin feature/новая-фича
+```
+    Откройте pull request
+
+## Лицензия
+
+Этот проект распространяется под лицензией MIT.
