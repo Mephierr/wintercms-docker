@@ -1,0 +1,68 @@
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app:/var/www/html
+      - ./app/storage:/var/www/html/storage
+    working_dir: /var/www/html
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      APP_DEBUG: ${APP_DEBUG:-true}
+      APP_KEY: ${APP_KEY:-}
+      APP_URL: ${APP_URL:-http://localhost:8080}
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: ${DB_DATABASE:-winter}
+      DB_USERNAME: ${DB_USERNAME:-winter}
+      DB_PASSWORD: ${DB_PASSWORD:-winter}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${DB_DATABASE:-winter}
+      MYSQL_USER: ${DB_USERNAME:-winter}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-winter}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  composer:
+    image: composer:2
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: composer install
+    networks:
+      - winter-network
+
+  node:
+    image: node:16
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
+    networks:
+      - winter-network
+
+volumes:
+  mysql-data:
+
+networks:
+  winter-network:
+    driver: bridge
