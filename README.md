@@ -85,12 +85,13 @@ DB_PASSWORD=winter
 ```
 
 ## Основные команды
-Команда	Описание
+```bash
 docker-compose up -d	Запуск контейнеров
 docker-compose down	Остановка контейнеров
 docker-compose exec app php artisan migrate	Выполнить миграции
 docker-compose exec app composer update	Обновить зависимости
 docker-compose logs -f app	Просмотр логов приложения
+```
 
 ## Решение проблем
 
